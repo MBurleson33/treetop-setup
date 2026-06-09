@@ -241,24 +241,6 @@
   .font-preset-name { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.4rem; display: block; }
   .font-preset-sample { font-size: 1.3rem; line-height: 1.2; color: var(--ink); }
 
-  /* Photo upload */
-  .photo-upload {
-    border: 2px dashed var(--sand);
-    border-radius: 2px;
-    padding: 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    background: var(--white);
-    position: relative;
-  }
-  .photo-upload:hover { border-color: var(--gold); background: var(--linen); }
-  .photo-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .photo-upload-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
-  .photo-upload-label { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.5; }
-  .photo-upload-hint { font-size: 0.75rem; color: var(--ink-light); margin-top: 0.25rem; }
-  .photo-preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: 2px; margin-top: 0.75rem; display: none; }
-
   /* Review step */
   .review-section { margin-bottom: 1.75rem; }
   .review-section-title {
@@ -488,26 +470,24 @@
     <h2 class="step-title">Your photos.</h2>
     <p class="step-desc">These are the most important part of your site. People connect with people — your photo builds trust instantly.</p>
 
+    <div style="background:var(--linen);border:1px solid var(--sand);border-left:3px solid var(--gold);border-radius:2px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;font-size:0.88rem;color:var(--ink-mid);line-height:1.7">
+      <strong style="color:var(--ink);display:block;margin-bottom:0.5rem">📸 Send your photos separately</strong>
+      After submitting this form, email your photos to <a href="mailto:hello@treetopbusiness.com" style="color:var(--gold)">hello@treetopbusiness.com</a> with your name in the subject line.
+    </div>
+
     <div class="field-group">
-      <label class="field-label">Hero Photo * <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:0.75rem;color:var(--ink-light)">— shown full-screen on the homepage</span></label>
-      <div class="photo-upload" id="heroUpload">
-        <input type="file" accept="image/*" onchange="previewPhoto(this,'heroPreview','heroUpload')">
-        <span class="photo-upload-icon">🖼</span>
-        <p class="photo-upload-label">Click to upload your hero photo</p>
-        <p class="photo-upload-hint">Portrait orientation works best · JPG or WebP · min 1200px tall</p>
-        <img id="heroPreview" class="photo-preview" alt="Hero preview">
-      </div>
+      <label class="field-label">Hero Photo</label>
+      <p style="font-size:0.85rem;color:var(--ink-mid);line-height:1.6">Full-length or half-body portrait — shown large on your homepage. <strong>Portrait orientation, minimum 1200px tall.</strong> JPG or WebP.</p>
+    </div>
+
+    <div class="field-group" style="margin-top:1rem">
+      <label class="field-label">About / Headshot Photo</label>
+      <p style="font-size:0.85rem;color:var(--ink-mid);line-height:1.6">A warm, approachable photo for your About page. Portrait or square, minimum 800px. JPG or WebP.</p>
     </div>
 
     <div class="field-group" style="margin-top:1.5rem">
-      <label class="field-label">About / Headshot Photo <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:0.75rem;color:var(--ink-light)">— shown on your About page</span></label>
-      <div class="photo-upload" id="aboutUpload">
-        <input type="file" accept="image/*" onchange="previewPhoto(this,'aboutPreview','aboutUpload')">
-        <span class="photo-upload-icon">📸</span>
-        <p class="photo-upload-label">Click to upload your about photo</p>
-        <p class="photo-upload-hint">Portrait or square · JPG or WebP · min 800px</p>
-        <img id="aboutPreview" class="photo-preview" alt="About preview">
-      </div>
+      <label class="field-label" for="s3PhotoNotes">Photo Notes (optional)</label>
+      <textarea class="field-input" id="s3PhotoNotes" placeholder="Any notes about your photos — which one is the hero, preferred cropping, etc."></textarea>
     </div>
 
     <div class="step-nav">
@@ -635,7 +615,6 @@
   var currentStep = 1;
   var totalSteps = 6;
   var selectedFont = 'elegant';
-  var photoFiles = { hero: null, about: null };
 
   var stepLabels = [
     'Contact Info',
@@ -756,8 +735,8 @@
         ['Font Style',      fontNames[selectedFont]],
       ]) +
       reviewSection('Photos', [
-        ['Hero Photo',   photoFiles.hero ? '✓ ' + photoFiles.hero.name : '— not uploaded'],
-        ['About Photo',  photoFiles.about ? '✓ ' + photoFiles.about.name : '— not uploaded'],
+        ['Photo Notes', v('s3PhotoNotes') || '— none provided'],
+        ['Instructions', 'Client will email photos separately'],
       ]) +
       reviewSection('Your Story', [
         ['Tagline',      v('s4Tagline') || '—'],
@@ -936,14 +915,11 @@
     formData.append('instagram',    v('s5Instagram'));
     formData.append('tiktok',       v('s5Tiktok'));
     formData.append('youtube',      v('s5Youtube'));
-    formData.append('notes',        v('s5Other'));
-    formData.append('config_js',    configJs);
+    formData.append('photo_notes',    v('s3PhotoNotes'));
+    formData.append('notes',          v('s5Other'));
+    formData.append('config_js',      configJs);
 
-    // Attach photos if uploaded
-    if (photoFiles.hero)  formData.append('hero_photo',  photoFiles.hero,  photoFiles.hero.name);
-    if (photoFiles.about) formData.append('about_photo', photoFiles.about, photoFiles.about.name);
-
-    fetch('https://formspree.io/f/YOUR_SETUP_FORM_ID', {
+    fetch('https://formspree.io/f/xwvjbdnl', {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }
