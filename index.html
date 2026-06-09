@@ -59,16 +59,6 @@
     background: var(--treetop);
     padding: 4rem 2rem 5rem;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .page-hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 60px;
-    background: var(--cream);
-    clip-path: ellipse(55% 100% at 50% 100%);
   }
   .hero-eyebrow {
     font-size: 0.7rem;
@@ -306,7 +296,265 @@
   .font-preset-name { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.4rem; display: block; }
   .font-preset-sample { font-size: 1.3rem; line-height: 1.2; color: var(--ink); }
 
-  /* Review step */
+  /* ── REVIEW LAYOUT ── */
+  .review-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 2.5rem;
+    align-items: start;
+    margin-bottom: 2rem;
+  }
+  .review-left { min-width: 0; }
+  .review-right {
+    position: sticky;
+    top: 100px;
+    text-align: center;
+  }
+  .preview-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .preview-note {
+    font-size: 0.7rem;
+    color: var(--ink-light);
+    margin-top: 0.75rem;
+    line-height: 1.5;
+  }
+
+  /* Phone frame */
+  .phone-frame {
+    width: 240px;
+    height: 480px;
+    background: #1a1a1a;
+    border-radius: 36px;
+    padding: 12px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.1),
+      0 20px 60px rgba(0,0,0,0.4),
+      0 4px 12px rgba(0,0,0,0.3);
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-notch {
+    width: 80px;
+    height: 8px;
+    background: #1a1a1a;
+    border-radius: 4px;
+    margin: 0 auto 8px;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+  .phone-screen {
+    flex: 1;
+    border-radius: 26px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--cream);
+    scrollbar-width: none;
+    font-size: 0; /* reset */
+  }
+  .phone-screen::-webkit-scrollbar { display: none; }
+  .phone-home-bar {
+    width: 60px;
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    margin: 8px auto 0;
+    flex-shrink: 0;
+  }
+
+  /* Mini nav */
+  .mini-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    background: white;
+    border-bottom: 1px solid #e8dfd0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .mini-nav-name {
+    font-size: 5px;
+    font-weight: 400;
+    color: #2C2520;
+    letter-spacing: 0.02em;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.2;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mini-order-btn {
+    font-size: 4px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #B89A6A;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  /* Mini hero */
+  .mini-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 110px;
+    background: #2C2520;
+    overflow: hidden;
+  }
+  .mini-hero-content {
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+  }
+  .mini-eyebrow {
+    font-size: 3px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #D4B896;
+    display: block;
+  }
+  .mini-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9px;
+    font-weight: 300;
+    color: #FAF7F2;
+    line-height: 1.25;
+  }
+  .mini-headline em { font-style: italic; color: #D4B896; }
+  .mini-body {
+    font-size: 4px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+    display: block;
+  }
+  .mini-btn {
+    font-size: 3.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #B89A6A;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 1px;
+    display: inline-block;
+    margin-top: 2px;
+    align-self: flex-start;
+  }
+  .mini-hero-img {
+    overflow: hidden;
+    position: relative;
+  }
+  .mini-hero-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5px;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+
+  /* Mini trust bar */
+  .mini-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 5px 4px;
+    background: #2C2520;
+    font-size: 3px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #D4B896;
+  }
+
+  /* Mini section */
+  .mini-section {
+    padding: 10px 8px;
+    background: #FAF7F2;
+  }
+  .mini-section-label {
+    font-size: 3px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #B89A6A;
+    margin-bottom: 3px;
+  }
+  .mini-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8px;
+    font-weight: 300;
+    color: #2C2520;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .mini-divider {
+    width: 20px;
+    height: 1px;
+    background: #B89A6A;
+    margin-bottom: 6px;
+  }
+  .mini-stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 4px;
+  }
+  .mini-stat {
+    background: white;
+    border: 1px solid #E8DFD0;
+    border-top: 2px solid #B89A6A;
+    padding: 4px 3px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .mini-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7px;
+    font-weight: 300;
+    color: #2C2520;
+    display: block;
+  }
+  .mini-stat-label {
+    font-size: 3px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8C7E72;
+    display: block;
+  }
+
+  @media (max-width: 640px) {
+    .review-layout { grid-template-columns: 1fr; }
+    .review-right { position: static; order: -1; }
+    .phone-frame { width: 200px; height: 400px; }
+  }
+
+  /* ── REVIEW CARDS ── */
   .review-section { margin-bottom: 1.75rem; }
   .review-section-title {
     font-size: 0.68rem;
@@ -419,75 +667,43 @@
 
     <div class="included-list">
       <div class="included-item">
-        <div class="included-item-left">
-          <span class="included-num">01</span>
-          <div class="included-item-line"></div>
-        </div>
-        <div class="included-item-right">
+        <span class="included-num">01</span>
+        <div>
           <h3 class="included-item-title">Full Website</h3>
           <p class="included-item-body">Homepage, about page, and order page — beautifully designed and branded to you. Mobile-perfect on every device.</p>
         </div>
       </div>
       <div class="included-item">
-        <div class="included-item-left">
-          <span class="included-num">02</span>
-          <div class="included-item-line"></div>
-        </div>
-        <div class="included-item-right">
+        <span class="included-num">02</span>
+        <div>
           <h3 class="included-item-title">Order Form + Payment</h3>
           <p class="included-item-body">Customers select products, submit their order, and pay via PayPal or Venmo. You get notified instantly. No transaction fees.</p>
         </div>
       </div>
       <div class="included-item">
-        <div class="included-item-left">
-          <span class="included-num">03</span>
-          <div class="included-item-line"></div>
-        </div>
-        <div class="included-item-right">
+        <span class="included-num">03</span>
+        <div>
           <h3 class="included-item-title">Admin Panel</h3>
           <p class="included-item-body">Update testimonials, product prices, and site copy yourself — no developer needed. Simple enough for anyone to use.</p>
         </div>
       </div>
       <div class="included-item">
-        <div class="included-item-left">
-          <span class="included-num">04</span>
-          <div class="included-item-line"></div>
-        </div>
-        <div class="included-item-right">
+        <span class="included-num">04</span>
+        <div>
           <h3 class="included-item-title">Transformation Gallery</h3>
           <p class="included-item-body">A scrolling before/after photo strip you can update anytime. Add new photos from your phone — no developer needed.</p>
         </div>
       </div>
       <div class="included-item">
-        <div class="included-item-left">
-          <span class="included-num">05</span>
-          <div class="included-item-line"></div>
-        </div>
-        <div class="included-item-right">
+        <span class="included-num">05</span>
+        <div>
           <h3 class="included-item-title">Hosting + Maintenance</h3>
           <p class="included-item-body">We handle everything — hosting, security, updates, and support. Your site stays fast, live, and looked after.</p>
         </div>
       </div>
     </div>
 
-    <!-- Pricing -->
-    <div class="pricing-wrap">
-      <div class="pricing-row">
-        <div class="pricing-block">
-          <span class="pricing-type">One-Time Setup</span>
-          <span class="pricing-price">$1,500</span>
-          <span class="pricing-detail">Site designed, built, and deployed with your branding and content</span>
-        </div>
-        <div class="pricing-plus">+</div>
-        <div class="pricing-block">
-          <span class="pricing-type">Monthly Hosting</span>
-          <span class="pricing-price">$100<span style="font-size:1rem;font-weight:300">/mo</span></span>
-          <span class="pricing-detail">Hosting, maintenance, and support — cancel anytime</span>
-        </div>
-      </div>
-    </div>
-
-    <a class="btn btn-gold" onclick="document.getElementById('progressWrap').scrollIntoView({behavior:'smooth'})" style="display:inline-flex;cursor:pointer;margin-top:2.5rem">
+    <a class="btn btn-gold" onclick="document.getElementById('progressWrap').scrollIntoView({behavior:'smooth'})" style="display:inline-flex;cursor:pointer">
       Get Started
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-left:0.5rem"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
@@ -722,10 +938,72 @@
 
   <!-- STEP 6 — Review -->
   <div class="step" id="step6">
-    <h2 class="step-title">Review & submit.</h2>
-    <p class="step-desc">Take a moment to review everything. Once you submit, we'll receive your info and be in touch within 1 business day to get started.</p>
+    <h2 class="step-title">Your site preview.</h2>
+    <p class="step-desc">Here's how your site will look based on your choices. Review everything and submit when you're ready.</p>
 
-    <div id="reviewContent"></div>
+    <div class="review-layout">
+
+      <!-- LEFT: Review summary -->
+      <div class="review-left">
+        <div id="reviewContent"></div>
+      </div>
+
+      <!-- RIGHT: Phone preview -->
+      <div class="review-right">
+        <p class="preview-label">Live Preview</p>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen" id="phoneScreen">
+
+            <!-- Mini nav -->
+            <div class="mini-nav" id="previewNav">
+              <span class="mini-nav-name" id="previewNavName">Your Name</span>
+              <span class="mini-order-btn" id="previewOrderBtn">Order Now</span>
+            </div>
+
+            <!-- Mini hero -->
+            <div class="mini-hero" id="previewHero">
+              <div class="mini-hero-content">
+                <span class="mini-eyebrow" id="previewEyebrow">Partner.Co Wellness</span>
+                <h3 class="mini-headline" id="previewHeadline">Your headline<br>goes <em>right here.</em></h3>
+                <p class="mini-body" id="previewBody">Your introduction will appear here, welcoming visitors to your site.</p>
+                <div class="mini-btn" id="previewBtn">Order Now</div>
+              </div>
+              <div class="mini-hero-img" id="previewHeroImg">
+                <div class="mini-hero-placeholder">
+                  <span>Your<br>Photo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mini trust bar -->
+            <div class="mini-trust" id="previewTrust">
+              <span>100% Natural</span>
+              <span>·</span>
+              <span>Free Shipping</span>
+              <span>·</span>
+              <span>Hormone-Free</span>
+            </div>
+
+            <!-- Mini section -->
+            <div class="mini-section">
+              <div class="mini-section-label" id="previewSectionLabel">What to Expect</div>
+              <div class="mini-section-title" id="previewSectionTitle">Proven results,<br>naturally.</div>
+              <div class="mini-divider" id="previewDivider"></div>
+              <div class="mini-stats">
+                <div class="mini-stat" id="previewStat1"><span class="mini-stat-num">½ lb</span><span class="mini-stat-label">Per Day</span></div>
+                <div class="mini-stat" id="previewStat2"><span class="mini-stat-num">3×</span><span class="mini-stat-label">Daily Dose</span></div>
+                <div class="mini-stat" id="previewStat3"><span class="mini-stat-num">¾ lb</span><span class="mini-stat-label">Men/Day</span></div>
+              </div>
+            </div>
+
+          </div>
+          <div class="phone-home-bar"></div>
+        </div>
+        <p class="preview-note">Colors and fonts update as you choose them</p>
+      </div>
+
+    </div>
 
     <div class="step-nav">
       <button class="btn btn-outline" onclick="prevStep(6)">← Back</button>
@@ -838,6 +1116,7 @@
     var val = document.getElementById(inputId).value;
     document.getElementById(swatchId).style.background = val;
     document.getElementById(valId).textContent = val;
+    if (currentStep === 6) updatePreview();
   }
   // Init swatches
   ['swatch1','swatch2','swatch3'].forEach(function(id, i) {
@@ -850,10 +1129,85 @@
     selectedFont = name;
     document.querySelectorAll('.font-preset').forEach(function(p) { p.classList.remove('selected'); });
     el.classList.add('selected');
+    if (currentStep === 6) updatePreview();
+  }
+
+  // ── LIVE PREVIEW ──
+  function updatePreview() {
+    var name      = v('s1Name') || 'Your Name';
+    var headline  = v('s4Headline') || 'Your headline\ngoes *right here.*';
+    var heroBody  = v('s4HeroBody') || 'Your introduction will appear here, welcoming visitors to your site.';
+    var gold      = document.getElementById('s2ColorGold').value || '#B89A6A';
+    var goldLight = lightenHex(gold, 20);
+    var ink       = document.getElementById('s2ColorInk').value || '#2C2520';
+    var cream     = document.getElementById('s2ColorCream').value || '#FAF7F2';
+
+    var fontMap = {
+      elegant: "'Cormorant Garamond', Georgia, serif",
+      modern:  "'Playfair Display', Georgia, serif",
+      fresh:   "'Lora', Georgia, serif"
+    };
+    var serifFont = fontMap[selectedFont] || fontMap.elegant;
+
+    // Nav
+    var navName = document.getElementById('previewNavName');
+    if (navName) navName.textContent = name;
+    var navEl = document.getElementById('previewNav');
+    if (navEl) navEl.style.background = 'white';
+    var orderBtn = document.getElementById('previewOrderBtn');
+    if (orderBtn) orderBtn.style.background = gold;
+
+    // Hero background
+    var hero = document.getElementById('previewHero');
+    if (hero) hero.style.background = ink;
+
+    // Eyebrow
+    var eyebrow = document.getElementById('previewEyebrow');
+    if (eyebrow) eyebrow.style.color = goldLight;
+
+    // Headline — parse *gold* markers
+    var headlineEl = document.getElementById('previewHeadline');
+    if (headlineEl) {
+      headlineEl.style.fontFamily = serifFont;
+      var lines = headline.split('\n');
+      headlineEl.innerHTML = lines.map(function(l) {
+        return l.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      }).join('<br>');
+      // Set em color
+      headlineEl.querySelectorAll('em').forEach(function(e) { e.style.color = goldLight; });
+    }
+
+    // Body
+    var bodyEl = document.getElementById('previewBody');
+    if (bodyEl) bodyEl.textContent = heroBody.substring(0, 80) + (heroBody.length > 80 ? '…' : '');
+
+    // CTA button
+    var btn = document.getElementById('previewBtn');
+    if (btn) btn.style.background = gold;
+
+    // Trust bar
+    var trust = document.getElementById('previewTrust');
+    if (trust) { trust.style.background = ink; trust.style.color = goldLight; }
+
+    // Section
+    var screen = document.getElementById('phoneScreen');
+    if (screen) screen.style.background = cream;
+    var sectionLabel = document.getElementById('previewSectionLabel');
+    if (sectionLabel) sectionLabel.style.color = gold;
+    var divider = document.getElementById('previewDivider');
+    if (divider) divider.style.background = gold;
+    var sectionTitle = document.getElementById('previewSectionTitle');
+    if (sectionTitle) sectionTitle.style.fontFamily = serifFont;
+
+    // Stat borders
+    document.querySelectorAll('.mini-stat').forEach(function(s) {
+      s.style.borderTopColor = gold;
+    });
   }
 
   // ── BUILD REVIEW ──
   function buildReview() {
+    updatePreview();
     var fontNames = { elegant: 'Elegant (Cormorant + DM Sans)', modern: 'Modern (Playfair + Jost)', fresh: 'Fresh (Lora + Nunito)' };
     var html =
       reviewSection('Contact Information', [
