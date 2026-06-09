@@ -344,6 +344,72 @@
   <p class="hero-body">Tell us about yourself and your brand. We'll build you a professional wellness site — complete with an admin panel, order form, and everything you need to grow your business.</p>
 </div>
 
+<!-- WHAT'S INCLUDED -->
+<div class="included-section">
+  <div class="included-wrap">
+    <span class="included-eyebrow">What You Get</span>
+    <h2 class="included-title">Everything you need to sell online — done for you.</h2>
+    <div class="included-grid">
+
+      <div class="included-card">
+        <span class="included-icon">🌐</span>
+        <h3 class="included-card-title">Full Website</h3>
+        <p class="included-card-body">A beautiful multi-page site with homepage, about page, and order page — designed specifically for Partner.Co distributors.</p>
+      </div>
+
+      <div class="included-card">
+        <span class="included-icon">🛒</span>
+        <h3 class="included-card-title">Order Form</h3>
+        <p class="included-card-body">A professional order form that collects customer info and routes payment to your Venmo or PayPal. No transaction fees.</p>
+      </div>
+
+      <div class="included-card">
+        <span class="included-icon">⚙️</span>
+        <h3 class="included-card-title">Admin Panel</h3>
+        <p class="included-card-body">Update your testimonials, product descriptions, prices, and site copy yourself — no developer needed, no technical knowledge required.</p>
+      </div>
+
+      <div class="included-card">
+        <span class="included-icon">📸</span>
+        <h3 class="included-card-title">Transformation Gallery</h3>
+        <p class="included-card-body">A scrolling before/after photo strip that you can add to anytime from your admin panel. Real results, elegantly displayed.</p>
+      </div>
+
+      <div class="included-card">
+        <span class="included-icon">📱</span>
+        <h3 class="included-card-title">Mobile Optimized</h3>
+        <p class="included-card-body">Looks and works perfectly on every device — phone, tablet, and desktop. Your customers are on their phones. So is your site.</p>
+      </div>
+
+      <div class="included-card">
+        <span class="included-icon">🚀</span>
+        <h3 class="included-card-title">Hosted & Deployed</h3>
+        <p class="included-card-body">We handle everything — hosting, deployment, domain connection, and ongoing maintenance. You focus on selling. We handle the tech.</p>
+      </div>
+
+    </div>
+
+    <div class="included-pricing">
+      <div class="pricing-card">
+        <span class="pricing-eyebrow">Setup</span>
+        <div class="pricing-amount">$1,500</div>
+        <p class="pricing-desc">One-time build fee. Site designed, built, and deployed with your branding and content.</p>
+      </div>
+      <div class="pricing-divider">+</div>
+      <div class="pricing-card">
+        <span class="pricing-eyebrow">Monthly</span>
+        <div class="pricing-amount">$100</div>
+        <p class="pricing-desc">Hosting, maintenance, and support. Cancel anytime.</p>
+      </div>
+    </div>
+
+    <a href="#start" class="btn btn-gold btn-full" onclick="document.getElementById('progressWrap').scrollIntoView({behavior:'smooth'})" style="max-width:320px;margin:0 auto;display:flex">
+      Get Started
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-left:0.5rem"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+</div>
+
 <!-- PROGRESS -->
 <div class="progress-wrap" id="progressWrap">
   <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:16.6%"></div></div>
@@ -472,7 +538,7 @@
 
     <div style="background:var(--linen);border:1px solid var(--sand);border-left:3px solid var(--gold);border-radius:2px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;font-size:0.88rem;color:var(--ink-mid);line-height:1.7">
       <strong style="color:var(--ink);display:block;margin-bottom:0.5rem">📸 Send your photos separately</strong>
-      After submitting this form, email your photos to <a href="mailto:hello@treetopbusiness.com" style="color:var(--gold)">hello@treetopbusiness.com</a> with your name in the subject line.
+      After submitting this form, email your photos to <a href="mailto:Burleson.Matthew@gmail.com" style="color:var(--gold)">Burleson.Matthew@gmail.com</a> with your name in the subject line.
     </div>
 
     <div class="field-group">
@@ -601,7 +667,7 @@
     <div class="next-step"><span class="next-step-num">4</span>We connect your domain and go live — usually within 3–5 business days</div>
   </div>
 
-  <p style="font-size:0.85rem;color:var(--ink-light)">Questions? Email us at <a href="mailto:hello@treetopbusiness.com" style="color:var(--gold)">hello@treetopbusiness.com</a></p>
+  <p style="font-size:0.85rem;color:var(--ink-light)">Questions? Email us at <a href="mailto:Burleson.Matthew@gmail.com" style="color:var(--gold)">Burleson.Matthew@gmail.com</a></p>
 </div>
 
 <!-- FOOTER -->
@@ -699,21 +765,6 @@
     selectedFont = name;
     document.querySelectorAll('.font-preset').forEach(function(p) { p.classList.remove('selected'); });
     el.classList.add('selected');
-  }
-
-  // ── PHOTO PREVIEW ──
-  function previewPhoto(input, previewId, uploadId) {
-    var file = input.files[0];
-    if (!file) return;
-    var key = uploadId === 'heroUpload' ? 'hero' : 'about';
-    photoFiles[key] = file;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      var img = document.getElementById(previewId);
-      img.src = e.target.result;
-      img.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
   }
 
   // ── BUILD REVIEW ──
