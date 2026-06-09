@@ -96,6 +96,71 @@
     line-height: 1.75;
   }
 
+  /* ── WHAT'S INCLUDED ── */
+  .included-section {
+    background: var(--white);
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--sand);
+  }
+  .included-wrap {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .included-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .included-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .included-subtitle {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+  .included-list { margin-bottom: 2.5rem; }
+  .included-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--linen);
+    align-items: start;
+  }
+  .included-item:first-child { border-top: 1px solid var(--linen); }
+  .included-num {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    width: 28px;
+    padding-top: 0.15rem;
+  }
+  .included-item-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .included-item-body {
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
   /* ── PROGRESS ── */
   .progress-wrap {
     max-width: 680px;
@@ -347,66 +412,86 @@
 <!-- WHAT'S INCLUDED -->
 <div class="included-section">
   <div class="included-wrap">
+
     <span class="included-eyebrow">What You Get</span>
     <h2 class="included-title">Everything you need to sell online — done for you.</h2>
-    <div class="included-grid">
+    <p class="included-subtitle">A complete professional website built specifically for Partner.Co distributors. No technical knowledge needed — ever.</p>
 
-      <div class="included-card">
-        <span class="included-icon">🌐</span>
-        <h3 class="included-card-title">Full Website</h3>
-        <p class="included-card-body">A beautiful multi-page site with homepage, about page, and order page — designed specifically for Partner.Co distributors.</p>
+    <div class="included-list">
+      <div class="included-item">
+        <div class="included-item-left">
+          <span class="included-num">01</span>
+          <div class="included-item-line"></div>
+        </div>
+        <div class="included-item-right">
+          <h3 class="included-item-title">Full Website</h3>
+          <p class="included-item-body">Homepage, about page, and order page — beautifully designed and branded to you. Mobile-perfect on every device.</p>
+        </div>
       </div>
-
-      <div class="included-card">
-        <span class="included-icon">🛒</span>
-        <h3 class="included-card-title">Order Form</h3>
-        <p class="included-card-body">A professional order form that collects customer info and routes payment to your Venmo or PayPal. No transaction fees.</p>
+      <div class="included-item">
+        <div class="included-item-left">
+          <span class="included-num">02</span>
+          <div class="included-item-line"></div>
+        </div>
+        <div class="included-item-right">
+          <h3 class="included-item-title">Order Form + Payment</h3>
+          <p class="included-item-body">Customers select products, submit their order, and pay via PayPal or Venmo. You get notified instantly. No transaction fees.</p>
+        </div>
       </div>
-
-      <div class="included-card">
-        <span class="included-icon">⚙️</span>
-        <h3 class="included-card-title">Admin Panel</h3>
-        <p class="included-card-body">Update your testimonials, product descriptions, prices, and site copy yourself — no developer needed, no technical knowledge required.</p>
+      <div class="included-item">
+        <div class="included-item-left">
+          <span class="included-num">03</span>
+          <div class="included-item-line"></div>
+        </div>
+        <div class="included-item-right">
+          <h3 class="included-item-title">Admin Panel</h3>
+          <p class="included-item-body">Update testimonials, product prices, and site copy yourself — no developer needed. Simple enough for anyone to use.</p>
+        </div>
       </div>
-
-      <div class="included-card">
-        <span class="included-icon">📸</span>
-        <h3 class="included-card-title">Transformation Gallery</h3>
-        <p class="included-card-body">A scrolling before/after photo strip that you can add to anytime from your admin panel. Real results, elegantly displayed.</p>
+      <div class="included-item">
+        <div class="included-item-left">
+          <span class="included-num">04</span>
+          <div class="included-item-line"></div>
+        </div>
+        <div class="included-item-right">
+          <h3 class="included-item-title">Transformation Gallery</h3>
+          <p class="included-item-body">A scrolling before/after photo strip you can update anytime. Add new photos from your phone — no developer needed.</p>
+        </div>
       </div>
-
-      <div class="included-card">
-        <span class="included-icon">📱</span>
-        <h3 class="included-card-title">Mobile Optimized</h3>
-        <p class="included-card-body">Looks and works perfectly on every device — phone, tablet, and desktop. Your customers are on their phones. So is your site.</p>
+      <div class="included-item">
+        <div class="included-item-left">
+          <span class="included-num">05</span>
+          <div class="included-item-line"></div>
+        </div>
+        <div class="included-item-right">
+          <h3 class="included-item-title">Hosting + Maintenance</h3>
+          <p class="included-item-body">We handle everything — hosting, security, updates, and support. Your site stays fast, live, and looked after.</p>
+        </div>
       </div>
-
-      <div class="included-card">
-        <span class="included-icon">🚀</span>
-        <h3 class="included-card-title">Hosted & Deployed</h3>
-        <p class="included-card-body">We handle everything — hosting, deployment, domain connection, and ongoing maintenance. You focus on selling. We handle the tech.</p>
-      </div>
-
     </div>
 
-    <div class="included-pricing">
-      <div class="pricing-card">
-        <span class="pricing-eyebrow">Setup</span>
-        <div class="pricing-amount">$1,500</div>
-        <p class="pricing-desc">One-time build fee. Site designed, built, and deployed with your branding and content.</p>
-      </div>
-      <div class="pricing-divider">+</div>
-      <div class="pricing-card">
-        <span class="pricing-eyebrow">Monthly</span>
-        <div class="pricing-amount">$100</div>
-        <p class="pricing-desc">Hosting, maintenance, and support. Cancel anytime.</p>
+    <!-- Pricing -->
+    <div class="pricing-wrap">
+      <div class="pricing-row">
+        <div class="pricing-block">
+          <span class="pricing-type">One-Time Setup</span>
+          <span class="pricing-price">$1,500</span>
+          <span class="pricing-detail">Site designed, built, and deployed with your branding and content</span>
+        </div>
+        <div class="pricing-plus">+</div>
+        <div class="pricing-block">
+          <span class="pricing-type">Monthly Hosting</span>
+          <span class="pricing-price">$100<span style="font-size:1rem;font-weight:300">/mo</span></span>
+          <span class="pricing-detail">Hosting, maintenance, and support — cancel anytime</span>
+        </div>
       </div>
     </div>
 
-    <a href="#start" class="btn btn-gold btn-full" onclick="document.getElementById('progressWrap').scrollIntoView({behavior:'smooth'})" style="max-width:320px;margin:0 auto;display:flex">
+    <a class="btn btn-gold" onclick="document.getElementById('progressWrap').scrollIntoView({behavior:'smooth'})" style="display:inline-flex;cursor:pointer;margin-top:2.5rem">
       Get Started
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-left:0.5rem"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
+
   </div>
 </div>
 
