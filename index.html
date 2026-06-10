@@ -246,22 +246,22 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 0.75rem;
     background: var(--white);
     border: 1px solid var(--sand);
     border-radius: 2px;
-    cursor: pointer;
     transition: border-color 0.2s;
   }
   .color-field:focus-within { border-color: var(--gold); }
   .color-swatch {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border-radius: 2px;
     border: 1px solid var(--sand);
     flex-shrink: 0;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
   }
   .color-swatch input[type="color"] {
     position: absolute;
@@ -273,13 +273,18 @@
     cursor: pointer;
     opacity: 0;
   }
-  .color-value {
-    font-size: 0.85rem;
-    font-family: monospace;
-    color: var(--ink-mid);
+  .color-text-input {
     flex: 1;
+    border: none;
+    outline: none;
+    font-family: monospace;
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    background: transparent;
+    min-width: 0;
+    padding: 0.25rem 0;
   }
-  .color-label-text { font-size: 0.85rem; color: var(--ink); }
+  .color-text-input::placeholder { color: var(--ink-light); }
 
   /* Font presets */
   .font-presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
@@ -768,39 +773,37 @@
   <!-- STEP 2 — Branding -->
   <div class="step" id="step2">
     <h2 class="step-title">Your brand colors.</h2>
-    <p class="step-desc">Choose the colors for your site. These will be applied throughout — buttons, accents, backgrounds. You can always update them later.</p>
+    <p class="step-desc">Choose from the color picker or type/paste a hex code (e.g. <code style="background:var(--linen);padding:0.1rem 0.4rem;border-radius:2px;font-size:0.85em">#B89A6A</code>) or RGB value (e.g. <code style="background:var(--linen);padding:0.1rem 0.4rem;border-radius:2px;font-size:0.85em">rgb(184,154,106)</code>).</p>
 
     <div class="field-group">
       <label class="field-label">Primary Accent Color</label>
       <div class="color-field">
         <div class="color-swatch" id="swatch1">
-          <input type="color" id="s2ColorGold" value="#B89A6A" oninput="updateSwatch('swatch1','s2ColorGold','s2ColorGoldVal')">
+          <input type="color" id="s2ColorGold" value="#B89A6A" oninput="updateSwatch('swatch1','s2ColorGold','s2ColorGoldText')">
         </div>
-        <span class="color-value" id="s2ColorGoldVal">#B89A6A</span>
-        <span class="color-label-text">Buttons, links, highlights</span>
+        <input type="text" class="color-text-input" id="s2ColorGoldText" value="#B89A6A" placeholder="#B89A6A or rgb(184,154,106)" oninput="updateFromText('swatch1','s2ColorGold','s2ColorGoldText')">
       </div>
-      <p class="field-hint">Your main brand color. Gold works beautifully for wellness brands — but choose what feels like you.</p>
+      <p class="field-hint">Your main brand color — buttons, links, highlights. Gold works beautifully for wellness brands.</p>
     </div>
 
     <div class="field-group">
       <label class="field-label">Dark Background Color</label>
       <div class="color-field">
         <div class="color-swatch" id="swatch2">
-          <input type="color" id="s2ColorInk" value="#2C2520" oninput="updateSwatch('swatch2','s2ColorInk','s2ColorInkVal')">
+          <input type="color" id="s2ColorInk" value="#2C2520" oninput="updateSwatch('swatch2','s2ColorInk','s2ColorInkText')">
         </div>
-        <span class="color-value" id="s2ColorInkVal">#2C2520</span>
-        <span class="color-label-text">Dark sections, nav overlay</span>
+        <input type="text" class="color-text-input" id="s2ColorInkText" value="#2C2520" placeholder="#2C2520" oninput="updateFromText('swatch2','s2ColorInk','s2ColorInkText')">
       </div>
+      <p class="field-hint">Used for dark sections, the nav, and hero background.</p>
     </div>
 
     <div class="field-group">
       <label class="field-label">Page Background Color</label>
       <div class="color-field">
         <div class="color-swatch" id="swatch3">
-          <input type="color" id="s2ColorCream" value="#FAF7F2" oninput="updateSwatch('swatch3','s2ColorCream','s2ColorCreamVal')">
+          <input type="color" id="s2ColorCream" value="#FAF7F2" oninput="updateSwatch('swatch3','s2ColorCream','s2ColorCreamText')">
         </div>
-        <span class="color-value" id="s2ColorCreamVal">#FAF7F2</span>
-        <span class="color-label-text">Main page background</span>
+        <input type="text" class="color-text-input" id="s2ColorCreamText" value="#FAF7F2" placeholder="#FAF7F2" oninput="updateFromText('swatch3','s2ColorCream','s2ColorCreamText')">
       </div>
       <p class="field-hint">Usually a warm off-white or very light neutral.</p>
     </div>
@@ -1031,6 +1034,12 @@
   </div>
 
   <p style="font-size:0.85rem;color:var(--ink-light)">Questions? Email us at <a href="mailto:Burleson.Matthew@gmail.com" style="color:var(--gold)">Burleson.Matthew@gmail.com</a></p>
+
+  <button id="downloadConfigBtn" class="btn btn-outline" style="margin-top:1.5rem" onclick="downloadConfig()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download config.js
+  </button>
+  <p style="font-size:0.72rem;color:var(--ink-light);margin-top:0.5rem">Keep this file — forward it to us along with your photos</p>
 </div>
 
 <!-- FOOTER -->
@@ -1112,12 +1121,43 @@
   });
 
   // ── COLOR PICKERS ──
-  function updateSwatch(swatchId, inputId, valId) {
+  function updateSwatch(swatchId, inputId, textId) {
     var val = document.getElementById(inputId).value;
     document.getElementById(swatchId).style.background = val;
-    document.getElementById(valId).textContent = val;
+    if (textId) document.getElementById(textId).value = val;
     if (currentStep === 6) updatePreview();
   }
+
+  // Convert any color format to hex for the color input
+  function toHex(str) {
+    str = str.trim();
+    if (/^#[0-9a-fA-F]{3,6}$/.test(str)) {
+      // Expand shorthand hex
+      if (str.length === 4) {
+        str = '#' + str[1]+str[1]+str[2]+str[2]+str[3]+str[3];
+      }
+      return str;
+    }
+    // Try rgb(r,g,b)
+    var rgb = str.match(/rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i);
+    if (rgb) {
+      return '#' + [rgb[1],rgb[2],rgb[3]].map(function(x) {
+        return parseInt(x).toString(16).padStart(2,'0');
+      }).join('');
+    }
+    return null;
+  }
+
+  function updateFromText(swatchId, colorInputId, textId) {
+    var raw = document.getElementById(textId).value;
+    var hex = toHex(raw);
+    if (hex) {
+      document.getElementById(colorInputId).value = hex;
+      document.getElementById(swatchId).style.background = hex;
+      if (currentStep === 6) updatePreview();
+    }
+  }
+
   // Init swatches
   ['swatch1','swatch2','swatch3'].forEach(function(id, i) {
     var colors = ['#B89A6A','#2C2520','#FAF7F2'];
