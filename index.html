@@ -662,6 +662,17 @@
   <p class="hero-body">Tell us about yourself and your brand. We'll build you a professional wellness site — complete with an admin panel, order form, and everything you need to grow your business.</p>
 </div>
 
+<!-- RESUME BANNER -->
+<div id="resumeBanner" style="display:none;background:var(--linen);border-bottom:1px solid var(--sand);padding:0.85rem 2rem;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+  <p style="font-size:0.85rem;color:var(--ink-mid)">
+    <strong style="color:var(--ink)">Welcome back!</strong> You were on <span id="resumeStepName"></span> — your answers have been saved.
+  </p>
+  <div style="display:flex;gap:0.75rem">
+    <button class="btn btn-gold btn-sm" onclick="resumeForm()" style="padding:0.5rem 1rem;font-size:0.72rem">Continue where I left off</button>
+    <button class="btn btn-outline btn-sm" onclick="clearProgress()" style="padding:0.5rem 1rem;font-size:0.72rem">Start over</button>
+  </div>
+</div>
+
 <!-- WHAT'S INCLUDED -->
 <div class="included-section">
   <div class="included-wrap">
@@ -1063,6 +1074,71 @@
     'Review & Submit'
   ];
 
+  // ── SAVE & RESTORE PROGRESS ──
+  var saveFields = ['s1Name','s1Email','s1Phone','s1Venmo','s1Paypal','s1Domain',
+    's4Tagline','s4Headline','s4HeroBody','s4Bio','s4Letter',
+    's3PhotoNotes','s5Facebook','s5Instagram','s5Tiktok','s5Youtube','s5Other'];
+
+  function saveProgress() {
+    var data = { step: currentStep, font: selectedFont };
+    saveFields.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+    data.colorGold  = document.getElementById('s2ColorGold').value;
+    data.colorInk   = document.getElementById('s2ColorInk').value;
+    data.colorCream = document.getElementById('s2ColorCream').value;
+    try { sessionStorage.setItem('setupProgress', JSON.stringify(data)); } catch(e) {}
+  }
+
+  function restoreProgress() {
+    try {
+      var raw = sessionStorage.getItem('setupProgress');
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      saveFields.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && data[id]) el.value = data[id];
+      });
+      if (data.colorGold) {
+        document.getElementById('s2ColorGold').value = data.colorGold;
+        document.getElementById('s2ColorGoldText').value = data.colorGold;
+        document.getElementById('swatch1').style.background = data.colorGold;
+      }
+      if (data.colorInk) {
+        document.getElementById('s2ColorInk').value = data.colorInk;
+        document.getElementById('s2ColorInkText').value = data.colorInk;
+        document.getElementById('swatch2').style.background = data.colorInk;
+      }
+      if (data.colorCream) {
+        document.getElementById('s2ColorCream').value = data.colorCream;
+        document.getElementById('s2ColorCreamText').value = data.colorCream;
+        document.getElementById('swatch3').style.background = data.colorCream;
+      }
+      if (data.font) {
+        selectedFont = data.font;
+        document.querySelectorAll('.font-preset').forEach(function(p) { p.classList.remove('selected'); });
+        var fontEl = document.querySelector('[onclick*="' + data.font + '"]');
+        if (fontEl) fontEl.classList.add('selected');
+      }
+      if (data.step && data.step > 1) {
+        // Show resume banner
+        var banner = document.getElementById('resumeBanner');
+        if (banner) {
+          banner.style.display = 'flex';
+          document.getElementById('resumeStepName').textContent = stepLabels[data.step - 1];
+        }
+      }
+    } catch(e) {}
+  }
+
+  // Save on every input change
+  document.addEventListener('input', saveProgress);
+  document.addEventListener('change', saveProgress);
+
+  // Restore on load
+  restoreProgress();
+
   // ── NAVIGATION ──
   function nextStep(from) {
     if (!validateStep(from)) return;
@@ -1415,6 +1491,23 @@
     } catch(e) { return hex; }
   }
 
+  function resumeForm() {
+    try {
+      var raw = sessionStorage.getItem('setupProgress');
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      if (data.step) goToStep(data.step);
+    } catch(e) {}
+    document.getElementById('resumeBanner').style.display = 'none';
+    document.getElementById('progressWrap').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function clearProgress() {
+    try { sessionStorage.removeItem('setupProgress'); } catch(e) {}
+    document.getElementById('resumeBanner').style.display = 'none';
+    location.reload();
+  }
+
   // ── SUBMIT ──
   function submitForm() {
     var btn = document.getElementById('submitBtn');
@@ -1463,11 +1556,26 @@
     });
   }
 
+  var generatedConfig = '';
+
   function showSuccess() {
+    generatedConfig = generateConfig();
+    try { sessionStorage.removeItem('setupProgress'); } catch(e) {}
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('resumeBanner').style.display = 'none';
     document.getElementById('successScreen').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function downloadConfig() {
+    var blob = new Blob([generatedConfig], { type: 'text/javascript' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = (v('s1Name').replace(/\s+/g,'-').toLowerCase() || 'client') + '-config.js';
+    a.click();
+    URL.revokeObjectURL(url);
   }
 </script>
 </body>
