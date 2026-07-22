@@ -1542,6 +1542,8 @@
     btn.disabled = true;
 
     var configJs = generateConfig();
+    generatedConfig = configJs;
+    clientName = v('s1Name') || 'client';
 
     // Build form data for Formspree
     var formData = new FormData();
@@ -1587,8 +1589,6 @@
   var clientName = '';
 
   function showSuccess() {
-    clientName = v('s1Name') || 'client';
-    generatedConfig = generateConfig();
     try { sessionStorage.removeItem('setupProgress'); } catch(e) {}
     document.getElementById('formWrap').style.display = 'none';
     document.getElementById('progressWrap').style.display = 'none';
@@ -1598,12 +1598,17 @@
   }
 
   function downloadConfig() {
-    if (!generatedConfig) { alert('No config to download — please submit the form first.'); return; }
-    var blob = new Blob([generatedConfig], { type: 'text/javascript' });
+    // Try stored config first, regenerate if empty
+    var config = generatedConfig || generateConfig();
+    if (!config || config.trim() === '') {
+      alert('Config is empty — please complete the form and submit first.');
+      return;
+    }
+    var blob = new Blob([config], { type: 'text/javascript' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = clientName.replace(/\s+/g,'-').toLowerCase() + '-config.js';
+    a.download = (clientName || 'client').replace(/\s+/g,'-').toLowerCase() + '-config.js';
     a.click();
     URL.revokeObjectURL(url);
   }
