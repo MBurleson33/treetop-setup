@@ -1168,7 +1168,7 @@
     currentStep = n;
     document.getElementById('step' + currentStep).classList.add('active');
     updateProgress();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('progressWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function updateProgress() {
@@ -1584,8 +1584,10 @@
   }
 
   var generatedConfig = '';
+  var clientName = '';
 
   function showSuccess() {
+    clientName = v('s1Name') || 'client';
     generatedConfig = generateConfig();
     try { sessionStorage.removeItem('setupProgress'); } catch(e) {}
     document.getElementById('formWrap').style.display = 'none';
@@ -1596,11 +1598,12 @@
   }
 
   function downloadConfig() {
+    if (!generatedConfig) { alert('No config to download — please submit the form first.'); return; }
     var blob = new Blob([generatedConfig], { type: 'text/javascript' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = (v('s1Name').replace(/\s+/g,'-').toLowerCase() || 'client') + '-config.js';
+    a.download = clientName.replace(/\s+/g,'-').toLowerCase() + '-config.js';
     a.click();
     URL.revokeObjectURL(url);
   }
