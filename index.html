@@ -758,7 +758,7 @@
 
     <div class="field-group">
       <label class="field-label" for="s1Name">Full Name *</label>
-      <input class="field-input" id="s1Name" type="text" placeholder="e.g. Tammy Maltby Melchisedeck" autocomplete="name">
+      <input class="field-input" id="s1Name" type="text" placeholder="e.g. Jane Smith" autocomplete="name">
     </div>
     <div class="field-row-2">
       <div class="field-group">
@@ -783,7 +783,7 @@
     </div>
     <div class="field-group">
       <label class="field-label" for="s1Domain">Desired Domain (optional)</label>
-      <input class="field-input" id="s1Domain" type="text" placeholder="e.g. tammywellness.com">
+      <input class="field-input" id="s1Domain" type="text" placeholder="e.g. yourwellnessbrand.com">
       <p class="field-hint">If you already have a domain or have one in mind. We'll help connect it.</p>
     </div>
 
@@ -1395,6 +1395,7 @@
     var font = fontMap[selectedFont];
     var name = v('s1Name');
     var safeName = name.replace(/'/g, "\\'");
+    var shortName = (name.split(' ')[0] || 'there').replace(/'/g, "\\'");
 
     return [
       '// ─────────────────────────────────────────────────────',
@@ -1415,7 +1416,7 @@
       '',
       '  brand: {',
       "    name:       '" + safeName + "',",
-      "    shortName:  '" + name.split(' ')[0] + "',",
+      "    shortName:  '" + shortName + "',",
       "    tagline:    '" + (v('s4Tagline') || 'Wellness. Faith. Purpose.').replace(/'/g,"\\'") + "',",
       "    email:      '" + v('s1Email') + "',",
       "    venmo:      '" + v('s1Venmo') + "',",
@@ -1458,10 +1459,10 @@
       '',
       '  hero: {',
       "    eyebrow:     'Partner.Co Wellness',",
-      "    headline:    'Feel like\\n*yourself* again.',",
+      "    headline:    '" + (v('s4Headline').replace(/'/g,"\\'").replace(/\n/g, '\\n') || 'Feel like\\n*yourself* again.') + "',",
       "    body:        '" + v('s4HeroBody').replace(/'/g,"\\'").replace(/\n/g, ' ') + "',",
       "    imgPosition: '45%',",
-      "    primaryBtn:  { label: 'Meet Tammy',       href: '#tammy' },",
+      "    primaryBtn:  { label: 'Meet " + shortName + "', href: '#about' },",
       "    secondaryBtn:{ label: 'Start Your Journey', href: '#drops' },",
       '  },',
       '',
@@ -1478,7 +1479,7 @@
       '',
       '  nav: {',
       '    links: [',
-      "      { label: 'Meet Tammy',   href: '#tammy' },",
+      "      { label: 'Meet " + shortName + "',   href: '#about' },",
       "      { label: 'Results',      href: '#results' },",
       "      { label: 'Testimonials', href: '#testimonials' },",
       "      { label: 'The Drops',    href: '#drops' },",
